@@ -1,0 +1,12 @@
+{
+    "name": "nguyenmanh/libs",
+    "require": {
+        "facebook/graph-sdk": "^5.6"
+    },
+    "authors": [
+        {
+            "name": "nguyenmanh",
+            "email": "nguyenmanh0397@gmail.com"
+        }
+    ]
+}
