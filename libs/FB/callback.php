@@ -23,17 +23,15 @@
     $response = $fb->get('/me', $_SESSION['login_fb']['token']);
     // lấy thông tin về user
     $me = $response->getGraphUser();
-    $graphObject = $response->getGraphObject();
+    // $graphObject = $response->getGraphObject();
 
     $fb->setDefaultAccessToken((string) $accessToken);
     $_SESSION['login_fb']['id'] = $me['id'];
     $_SESSION['login_fb']['id'] = $me['id'];
+    $_SESSION['login_fb']['name'] = $me['name'];
 
-    echo "<pre>";
-    print_r($graphObject );
-    echo "</pre>";
-
-    header("location: test.php");
+    // dang nhap xong chuyen huong ve trang admin
+    header("location: ../../admin");
 
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
     // When Graph returns an error

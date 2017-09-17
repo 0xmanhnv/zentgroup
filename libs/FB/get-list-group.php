@@ -5,8 +5,4 @@
 		$groups = $response->getDecodedBody();
 		return $groups;
 	}
-	$a = get_list_group();
-	echo "<pre>";
-    print_r($a['data']);
-    echo "</pre>";
  ?>

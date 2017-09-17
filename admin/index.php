@@ -23,45 +23,18 @@
 		include_once('../libs/database.php');
 		include_once('../libs/role.php');
 		include_once('../libs/helper.php');
-		include_once('../libs/FB/login.php');
-		include_once($path);
+
+		// chua dang nhap thi vao login
+		// dang nhap roi thi chuyen toi trang index
 		if(isset($_SESSION['login_fb'])) {
-
-			include_once('../libs/FB/func.php');
-
-			$a = get_list_group();
-			// $a['data']
-			// foreach ($a['data'] as $key => $value) {
-			// 	echo "<pre>";
-			//     print_r($value['id']);
-			//     echo "</pre>";
-			//     $post = get_posts_group($value['id']);
-			//     echo "<pre>";
-			//     print_r($post);
-			//     echo "</pre>";
-			// }
-			db_connect();
-
-		    $post = get_posts_group(1807137576201935);
-		    // echo "<pre>";
-		    // print_r($post['data']);
-		    // echo "</pre>";
-
-		    // foreach ($post['data'] as $key => $value) {
-		    // 	if(isset($value['message'])){
-		    // 		$sql = "INSERT INTO group_post (id, id_group, content_post) VALUES ('".$value['id']."', '236617253512342', '".$value['message']."')";
-			   //  	$conn->query($sql);
-		    // 	}
-		    // }
-
-			// echo "<pre>";
-		 //    print_r($a['data'][0]['id']);
-		 //    echo "</pre>";
-
+			if(!isset($_GET['a']) || $_GET['a'] == '') {
+				$path = "modules/".$module."/".'index'.'.php';
+				include_once($path);
+			}
+			include_once($path);
+		}else {
+			include_once($path);
 		}
-		echo "<pre>";
-		    print_r($_SESSION);
-		    echo "</pre>";
 	}else {
 		// truong hop url khong ton tai thi thong bao loi
 		include_once('modules/common/404.php');
