@@ -23,6 +23,7 @@
 
         <!-- Custom Fonts -->
         <link href="../public/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../public/css/style.css" rel="stylesheet" type="text/css">
 
     </head>
 

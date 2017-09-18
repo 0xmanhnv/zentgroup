@@ -4,6 +4,12 @@
 	include_once('../libs/FB/get-list-group.php');
 	$groups = get_list_group();
 ?>
+
+<?php if(isset($_COOKIE['msg'])){ ?>
+	<div class="alert alert-success" style="width: 50%; position: fixed; top: 100px; right: 0px;">
+	  <strong>Success!</strong> <?php echo $_COOKIE['msg']; ?>
+	</div>
+<?php } ?>
 <div id="page-wrapper">
 	<table class="table table-hover">
 		<thead>
@@ -31,25 +37,27 @@
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <button type="button" class="close" data-dismiss="modal">&times;</button>
-					        <h4 class="modal-title">Modal Header</h4>
+					        <h3 class="modal-title" style="font-weight: bold;">Đăng bài lên nhóm</h3>
 					      </div>
 					      <div class="modal-body">
 					        <form action="<?php echo base_url('admin/?m=common&a=post_to_groupFB'); ?>" method="POST" role="form">
-					        	<legend>Form title</legend>
+					        	<legend style="text-align: center;"><?php echo $value['name'] ?></legend>
 					        	<div class="form-group">
-					        		<input type="text" hidden class="form-control" value="<?php echo $value['id']; ?>" placeholder="Input link" name="idgroup">
+					        		<input type="text" hidden="true" value="<?php echo $value['id']; ?>" name="idgroup">
 					        	</div>
-					        	<div class="form-group">
+					        	<!-- <div class="form-group">
 					        		<label for="">Link: </label>
 					        		<input type="text" class="form-control" id="" placeholder="Input link" name="link">
-					        	</div>
+					        	</div> -->
 					        	<div class="form-group">
-					        		<label for="">Message: </label>
-					        		<input type="text" class="form-control" id="" placeholder="Input message" name="message">
+					        		<div class="form-group">
+									  <label for="message">Message:</label>
+									  <textarea class="form-control" rows="5" id="comment" name="message"></textarea>
+									</div> 
 					        	</div>
 					      
 					        
-					        	<button type="submit" class="btn btn-primary" name="submit">Đăng bài</button>
+					        	<button type="submit" class="btn btn-primary" name="submit" style="width: 100%;">Đăng bài</button>
 					        </form>
 					      </div>
 					      <div class="modal-footer">

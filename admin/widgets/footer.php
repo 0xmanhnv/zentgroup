@@ -5,6 +5,13 @@
 	    <!-- jQuery -->
 	    <script src="../public/js/jquery.min.js"></script>
 	    <!-- Bootstrap Core JavaScript -->
+	    <script type="text/javascript">
+			$(function(){
+				setTimeout(function(){
+					$('.alert').hide(1000);
+				},3000);
+			});
+		</script>
 	    <script src="../public/js/bootstrap.min.js"></script>
 	    <!-- Metis Menu Plugin JavaScript -->
 	    <script src="../public/js/metisMenu.min.js"></script>

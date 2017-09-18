@@ -1,5 +1,4 @@
 <?php 
-	// require_once __DIR__ . '/vendor/autoload.php';
 	require_once 'app.php';
 	use Facebook\FacebookRequest;
 	use Facebook\FacebookSession;
@@ -16,7 +15,7 @@
 	function get_posts_group($idGroup) {
 
 		global $fb;
-		$requestGroupPosts = $fb->get('/'.$idGroup.'/feed' , $_SESSION['login_fb']['token']);
+		$requestGroupPosts = $fb->get('/'.$idGroup.'/feed?limit=25' , $_SESSION['login_fb']['token']);
 
 		$posts = $requestGroupPosts->getDecodedBody();
 		return $posts;
@@ -32,29 +31,50 @@
 	// dang bai vao group
 	function post_to_group($idGroup, $link, $message) {
 		global $fb;
-		if(isset($_POST['submit'])) {
-			$link = $_POST['link'];
-			$message = $_POST['message'];
-			$linkData = [
-			  'link' => $link,
-			  'message' => $message,
-			  ];
 
-			try {
-			  // Returns a `Facebook\FacebookResponse` object
-			  $response = $fb->post('/"'.$idGroup.'"/feed', $linkData, $_SESSION['login_fb']['token']);
-			  // echo $response;
+		$messageData = [
+		  'link' => $link,
+		  'message' => $message,
+		  ];
+		try {
+		  // Returns a `Facebook\FacebookResponse` object
+		  $response = $fb->post('/'.$idGroup.'/feed', $messageData, $_SESSION['login_fb']['token']);
 
-			  
-			} catch(Facebook\Exceptions\FacebookResponseException $e) {
-			  echo 'Graph returned an error: ' . $e->getMessage();
-			  exit;
-			} catch(Facebook\Exceptions\FacebookSDKException $e) {
-			  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-			  exit;
-			}
-		}else {
-			header("location: ../../admin");
+		  
+		} catch(Facebook\Exceptions\FacebookResponseException $e) {
+		  echo 'Graph returned an error: ' . $e->getMessage();
+		  exit;
+		} catch(Facebook\Exceptions\FacebookSDKException $e) {
+		  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+		  exit;
 		}
+	}
+
+	// lay so luong like
+	function get_reactions($idObject){
+		global $fb;
+
+		$request = (array) $fb->get('/'.$idObject.'/reactions' , $_SESSION['login_fb']['token'])->getDecodedBody();
+		
+		$reactions = $request;
+		return $reactions;
+	}
+
+	// lay comment
+	function get_comments($idObject){
+		global $fb;
+
+		$request = $fb->get('/'.$idObject.'/comments' , $_SESSION['login_fb']['token']);
+		$comments = $request->getDecodedBody();
+
+		return $comments;
+	}
+
+	// lay thong tin nguoi post
+	function getInfoUserPost($idPost){
+		global $fb;
+		$info = $fb->get('/'.$idPost.'/?fields=from,picture,permalink_url' , $_SESSION['login_fb']['token'])->getDecodedBody();
+
+		return $info;
 	}
 ?>
